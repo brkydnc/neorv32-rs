@@ -1,0 +1,7 @@
+[build]
+target = "riscv32imafc-unknown-none-elf"
+
+[target.'cfg(all(target_arch = "riscv32", target_os = "none"))']
+rustflags = [
+  "-C", "link-arg=-Tneorv32.ld",
+]
