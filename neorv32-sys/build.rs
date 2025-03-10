@@ -36,7 +36,7 @@ fn compile_static_library(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
     // Set up cc build configuration
     cc::Build::new()
         .no_default_flags(true)
-        .compiler("riscv-none-elf-gcc")
+        .compiler("/opt/riscv/bin/riscv32-unknown-elf-gcc")
         .flag("-march=rv32i_zicsr_zifencei")
         .flag("-mabi=ilp32")
         .flag("-Os")
@@ -60,7 +60,7 @@ fn compile_static_library(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
         .include(&include)
         .files(&source_files)
         .static_flag(true)
-        .warnings(true)
+        .warnings(false)
         .compile("neorv32");
 
     println!("cargo:rerun-if-changed={}", source.display());
@@ -75,8 +75,12 @@ fn generate_bindings(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
     let header = path.to_str().ok_or("Could not get path string")?;
 
     let bindings = bindgen::Builder::default()
+        .clang_args(&["-target", "riscv32"])
+        .clang_args(&["-isystem", "/opt/riscv/riscv32-unknown-elf/include"])
         .header(header)
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .blocklist_file("/opt/riscv/riscv32-unknown-elf/include.*")
+        .use_core()
         .generate()
         .expect("Unable to generate bindings");
 
