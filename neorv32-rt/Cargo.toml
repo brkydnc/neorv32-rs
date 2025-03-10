@@ -1,6 +1,14 @@
 [package]
+authors = ["Berkay Dinç <berkayydinc@gmail.com>"]
+description = "NEORV32 runtime support for Rust."
+repository = "https://github.com/brkydnc/neorv32-rs"
+homepage = "https://github.com/brkydnc/neorv32-rs"
 name = "neorv32-rt"
+license-file = "LICENSE"
+readme = "README.md"
 version = "0.1.0"
 edition = "2024"
+categories = ["no-std", "embedded"]
+keywords = ["neorv32", "riscv", "runtime", "startup"]
 
 [dependencies]
