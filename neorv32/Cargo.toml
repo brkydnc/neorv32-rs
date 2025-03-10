@@ -1,0 +1,7 @@
+[package]
+name = "neorv32"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+neorv32-sys = { version = "0.1.0", path = "../neorv32-sys" }

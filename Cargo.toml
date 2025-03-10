@@ -1,3 +1,3 @@
 [workspace]
 resolver = "2"
-members = ["neorv32-rt", "neorv32-sys"]
+members = [ "neorv32","neorv32-rt", "neorv32-sys"]
