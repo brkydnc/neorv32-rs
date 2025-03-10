@@ -75,14 +75,19 @@ fn generate_bindings(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
     let header = path.to_str().ok_or("Could not get path string")?;
 
     let bindings = bindgen::Builder::default()
+        .use_core()
+        .header(header)
         .clang_args(&["-target", "riscv32"])
         .clang_args(&["-isystem", "/opt/riscv/riscv32-unknown-elf/include"])
-        .header(header)
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .blocklist_file("/opt/riscv/riscv32-unknown-elf/include.*")
-        .use_core()
-        .generate()
-        .expect("Unable to generate bindings");
+        // SAFETY: `neorv32_uart_vprintf` function needs `va_list`, which is
+        // defined as `__builtin_va_list`. However, disabling system headers
+        // prevents generating `__builtin_va_list` automatically. Since RISC-V
+        // psABI defines `__builtin_va_list` as `*void`, we are safe to plug
+        // that line manually.
+        .raw_line("pub type __builtin_va_list = *mut ::core::ffi::c_void;")
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .generate()?;
 
     // Write the bindings to the $OUT_DIR/bindings.rs file.
     let out_path = PathBuf::from(env::var("OUT_DIR")?);
