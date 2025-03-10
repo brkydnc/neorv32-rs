@@ -8,8 +8,8 @@ license-file = "LICENSE"
 readme = "README.md"
 version = "0.1.0"
 edition = "2024"
-categories = ["no-std", "external-ffi-bindings"]
-keywords = ["neorv32", "riscv", "bindings", "ffi", "hardware-support"]
+categories = ["no-std", "external-ffi-bindings", "hardware-support"]
+keywords = ["neorv32", "riscv", "bindings", "ffi"]
 exclude = [
     "neorv32/",
     "!neorv32/LICENSE",

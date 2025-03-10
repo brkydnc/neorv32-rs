@@ -8,8 +8,8 @@ license-file = "LICENSE"
 readme = "README.md"
 version = "0.1.0"
 edition = "2024"
-categories = ["no-std", "external-ffi-bindings"]
-keywords = ["neorv32", "riscv", "hardware-support", "api-bindings", "embedded"]
+categories = ["no-std", "hardware-support", "api-bindings", "embedded"]
+keywords = ["neorv32", "riscv"]
 
 
 [dependencies]
