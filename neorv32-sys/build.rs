@@ -75,7 +75,6 @@ fn generate_bindings(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
     let header = path.to_str().ok_or("Could not get path string")?;
 
     let bindings = bindgen::Builder::default()
-        .use_core()
         .header(header)
         .clang_args(&["-target", "riscv32"])
         .clang_args(&["-isystem", "/opt/riscv/riscv32-unknown-elf/include"])
@@ -87,6 +86,8 @@ fn generate_bindings(root: &PathBuf) -> Result<(), Box<dyn Error>>  {
         // that line manually.
         .raw_line("pub type __builtin_va_list = *mut ::core::ffi::c_void;")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .rustified_enum(".*")
+        .use_core()
         .generate()?;
 
     // Write the bindings to the $OUT_DIR/bindings.rs file.
