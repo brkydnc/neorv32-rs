@@ -21,4 +21,4 @@ exclude = [
 
 [build-dependencies]
 bindgen = "0.71.1"
-cc = { version = "1.2.16", features = ["parallel"] }
+cc = { version = "1.2.25", features = ["parallel"] }
