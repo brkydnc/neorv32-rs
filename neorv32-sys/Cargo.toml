@@ -11,6 +11,7 @@ edition = "2024"
 categories = ["no-std", "external-ffi-bindings", "hardware-support"]
 keywords = ["neorv32", "riscv", "bindings", "ffi"]
 exclude = [
+    "bindings.rs",
     "neorv32/",
     "!neorv32/LICENSE",
     "!neorv32/sw/lib/**/*",
