@@ -168,6 +168,8 @@ version = "0.1.0"
 dependencies = [
  "bindgen",
  "cc",
+ "neorv32-rt",
+ "panic-halt",
 ]
 
 [[package]]
@@ -179,6 +181,12 @@ dependencies = [
  "memchr",
  "minimal-lexical",
 ]
+
+[[package]]
+name = "panic-halt"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a513e167849a384b7f9b746e517604398518590a9142f4846a32e3c2a4de7b11"
 
 [[package]]
 name = "prettyplease"
